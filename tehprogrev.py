@@ -7,8 +7,8 @@ import datetime
 import time
 
 
-bot = telebot.TeleBot('1456092584:AAHqNDORKWcBBFttKxhYVMuQ2_Sjnp4H11c')
-CHAT = '-407748812'
+bot = telebot.TeleBot('token')
+CHAT = 'id_group'
 id = 0
 numTanka = '';
 nameZakaz = '';
@@ -54,9 +54,7 @@ def start(message):
     cur.execute("""CREATE TABLE IF NOT EXISTS idusers ( id INT NOT NULL PRIMARY KEY, imya TEXT); """)
     cur.execute(f"""SELECT * FROM idusers WHERE id = '{idTeleg}' """)
     rows = cur.fetchall()
-    #if len(rows) == 1:
-     #   bot.send_message(message.from_user.id, f'💈снова рады видеть')
-    #else:
+    
     if len(rows) < 1:
         cur.execute("""INSERT INTO idusers(id, imya) VALUES(?, ?);""", (idTeleg, imyaTeleg))
     conn.commit()
@@ -241,9 +239,6 @@ def get_dataPostup(message):
     conn.commit()
     bot.send_message(CHAT, f'Данные успешно внесены в базу данных для танк-контейнера №{tankIzmen} ');
 
-        ##bot.send_message(CHAT, f'такого танк-контейнера нет');
-
-    ##bot.register_next_step_handler(message, get_dlinna);
 
 def get_uznat_tem(message):
     global uznat_temp;
